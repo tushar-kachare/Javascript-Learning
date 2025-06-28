@@ -1,0 +1,361 @@
+********All the import Notes of JS********
+Javascript is Synchronus and Single threaded language
+
+
+let const -> BLOCK SCOPED
+var -> FUNCTION SCOPED
+
+at start of running js code
+global execution context is created 
+
+**at first memory creation process happens -> allocate memory to all the variables functions defination will be stored
+**then code execution phase is happens line by line
+
+
+**FUNCTION 
+for every function invoke brand new execution context is created with its own memory phase and code execution phase.
+again memory creation and then code execution phase is followed
+then at last whole execution context for function will be deleted
+
+
+***Block Code (if, else, loops)
+for block code separete lexical enviroment is created but withing same execution context so it does not crate separet execution context
+*****CALLSTACK stores all the execution context in stack manner*****
+
+***
+You can redeclare Var variables
+var a = 10
+var a = 18 a holds 18 cannot do with let and const
+
+
+HOISTING -> Access the functions and variables even before you have initialized it eg
+
+console.log(x)
+Print() -> out put undefined , HELLO as memory creation phase has been completed x stores undefined and function defination is stored also completely
+var x = 7
+function Print() {
+    console.log("HELLO")
+}
+*** THIS IS ONLY FOR VAR ****
+
+Let and Const also hoisted but they are differently hoisted not like var
+we cannot access let and const values before initialization they are in ** TEMPORAL DEADZONE ** ->time between hoisting to value assigned to it.
+
+**** CLOSURE ****
+
+A closure is a function that remembers variables from its lexical (outer) scope, 
+even after that outer function has finished executing.
+When you define a function inside another function, the inner function "closes over" the outer function’s lexical environment — 
+meaning it keeps access to those variables even after the outer function is done.
+
+function js1() {
+    let a = 10;
+    function js2() {
+        console.log(a);
+        a++;
+    }
+    return js2 // returns the function itself and its *** Lexical scope *** which is its parent and all its varibles
+}
+
+const js3 = js1() // js3 is function itself
+console.log(js3()) // 10 is printed because of lexical scope which it stores 
+
+
+**** setTimeout(callback, time_in_ms)
+it lets you delay piece of code by specific time in MS 
+though it doesnt block other code for that amount of code 
+eg ]
+
+console.log(1);
+
+setTimeout(()=>{
+    console.log(2);
+    
+},1000)
+
+console.log(3); output -> 1,3,2
+how does it work -> after setTimeout called it registers callback function and attaches it to timer in schedular 
+after delay it is added to call stack and executed but,  js doesnt stop execution for delay
+
+***** Functions *****
+
+// function defination / function declaration
+function a() {
+    console.log("a is called")
+}
+// function expression
+var b = function () {
+    console.log("b is called")
+}
+diff between them is that in hoisting a can be called before initialization and b cannot as b has undefined in memory
+
+// Anonymous function 
+function () {
+    console.log('C is called')
+} // it is syntax error
+it can be assigned to variables
+
+First class Functions / First class Citezens -> ability to use functions as variables , pass as argument in other function , return function
+
+CallBack function -> function passed as an argument is nothing but an callback function
+
+setTimeout(function (){
+    console.log('x');
+},5000)
+
+for(let i = 0; i<10; i++) {
+    setTimeout(function () {
+        console.log(i);
+    },i*1000)
+}
+console.log("HI"); output -> HI,0 to 4 then x then 5 to 9 
+
+***** Asynchronous JavaScript *****
+
+to connect js to browser -> web APIs used
+setTimeout
+console
+fetch
+dom APIs eg] document.(...)
+location
+storage .. these are all web apis to connect js to browser
+
+How is it executed ?
+
+console.log("Start")
+setTimeout(function a(){
+    console.log("Call Back function");
+}, 5000)
+console.log("End")
+
+
+so at first global execution context is created and added to call stack
+so then line by line execution
+using console web API "Start" is logged on the console screen
+then it see setTimout it is also web api for timer
+then Timer api is called and that callback function is scheduled and timer of 5 sec is attached to it counting down till 0
+then last line console web api is called "End" is logged on the console screen
+as code has ended global execution is removed from call stack
+as timer is counting down when timer reaches 0sec that callback function is added to callback queue (FIFO)
+
+and using event loop -> it basically monitors both call stack and callback queue when call stack is empty
+add first callback function from callback queue to call stack
+
+then using event loop that callback function is added to callstack *** only when it is empty *** then it is executed
+
+thats how this code works same for other web APIs
+
+
+****** There is also called like MicroTask queue basically it is like higher priority call back queue
+****** Callback functions from promises / fetch api , Mutation Observer,  of browser are added into microtask queue when data is completely fetched
+****** when all the functions from microtask queue are executed using event loop and callstack then only callback queue functions will execute
+****** so starvation of Callback queue can happen 
+
+*****  MutationObserver in JavaScript is a Web API that provides the ability to watch for changes being made to the Document Object Model (DOM) tree
+
+
+*** JS environment ***
+it has js engine, callback queue, multitask queue, APIs
+
+*** JS engine ***
+components -> Just in Time compiler, parser, interpretor, garbage collector , heap memory, stack memory, callstack 
+
+garbage collector -> automatically frees the memory which is not being used
+
+
+*** Compiler -> firstly whole code is converted to machine code / bytes then executed -> shows whole syntax errors eg languages-> c/c++
+*** interpretor -> line by line conversion of code to machine code and execution -> stops at first error and display it eg language-> python,js
+
+chrome V8 engine -> interpretor: ignition , compiler: Turbo fan
+
+** Process of Execution  V8 engine?
+
+firstly code is parsed through Parser (it converts code to AST)
+AST (abstract Syntax Tree) is created it checks syntax errors
+then using ignition interpretor convertes it to byte code and executed 
+or Turbo fan compiler makes byte code more optimize it is also used
+
+
+*** higher Order Functions
+functions which take other functions as argument or returns functions are called higher order functions
+
+**** Functional Programming *** pass functions as argument in other functions it saves code length readibility
+
+const area = function (radius) {
+    return Math.PI * radius * radius
+}
+const CircumeFerence = function (radius) {
+    return 2 * Math.PI * radius 
+}
+
+const calculate = function(arr, logic) {
+    const ans = []
+    for(let i = 0; i<arr.length; i++) {
+        ans.push(logic(arr[i]))
+    }
+    return ans;
+}
+console.log((calculate([2,3,4],area)));
+
+
+*** Polyfil ***
+Map
+
+Array.prototype.MyMap = function (callback) {
+    const output = []
+    for(let i = 0; i<this.length; i++) {
+        output.push(callback(this[i]))
+    }
+    return output
+}
+
+const check = [1,2,3,4]
+
+check.MyMap((radius) => (radius*radius));
+
+**** reduce *****
+
+Array.prototype.Reduce = function(callback,curr) {
+    for(let i = 0; i<this.length; i++) {
+        curr = callback(curr , this[i])
+    }
+    return curr;
+}
+const ans = check.Reduce(function (acc,curr) {
+    acc = acc + curr;
+    return acc
+}, 0)
+console.log(ans);
+
+
+*** Reduce function ***
+const arr = [1,2,3,4]
+
+find sum of array using Reduce
+
+arr.reduce(function (acc , curr) {
+    acc = acc + curr
+    return acc
+},0) // callback function takes two arguments accumulator/answer and current element and after function it takes initial value of accumulator/answer
+
+// when to use which 
+// when you want whole array as return and same operation on each item then use Map
+// when you want to come up with single value from arr then you can use reduce
+
+*** Issues of Callback functions ***
+callback hell -> callback inside another callback like nested
+
+eg] api.creatorder(cart, function() {
+    
+    api.proceedToPayment(function() {
+        api.verification();
+    })
+})
+we loose the control over callback functions nested in other callback functions -> inversion of control
+
+**** Promises ****
+
+It is an object that represents eventual completion or fialure of async operation
+
+
+ **** Promise chaining **** 
+ when catch statement is at last it checks for any error / rejection of any promise for particular promise use catch just after it
+
+createOrder(cart)
+    .then(function(orderId) {
+        console.log(`orderId is ${orderId}`);
+        return orderId
+    })
+    .then(function (orderId) {
+        return proceedToPayment(orderId)
+    })
+    .then(function (message) {
+        console.log(message);
+    })
+    .catch(function (err) {
+        console.log("Cart is not valid");
+    })
+
+function createOrder(cart) {
+
+    const pr = new Promise(function (resolve, reject) {
+
+        if(!validate(cart)) {
+            const err = new Error('Promise is rejected')
+            setTimeout(() => {
+                reject(err) // reject promise with result message (err)
+            }, 5000);
+        }
+        else {
+            orderId = '13131'
+            setTimeout(function () {
+                resolve(orderId) // resolve promise returning orderId
+            },5000)
+        }
+    })
+    return pr
+}
+function validate(cart) {
+    return true;
+}
+
+function proceedToPayment(orderId) {
+    return new Promise(function(resolve,reject) {
+        setTimeout(function () {
+            resolve(`Payment for orderId ${orderId} is successful`)
+        },5000)
+    })
+}
+    
+*** Promise Apis ***
+ 
+1] Promise.all([p1,p2,p3]) // p1 , p2 , p3 are promises ** It makes parallel calls for promises **
+// it will result array of returned value from each promises [val1,val2,val3]
+// **** If one of fails it immediatelly throws (Error) it does not wait for other settlements
+
+2] Promise.allSettled([p1,p2,p3]) // ** It will for settlements of all the promises even if ones of throws error 
+// result array of returnd value even if one is error [val1,val2,val3]
+
+3]Promise.race([p1,p2,p3]) // *** Returns the result of first settled promise wheather it rejects or resolve
+// so single value
+
+4] Promise.any([p1,p2,p3]) // *** returns the first fulfilled promise if any 
+// if neither if them fulfills then returns aggregate error of all the promises
+
+**** This **** 
+
+// this is special keyword in javascript which refers to object that is executing current function
+
+// **** check Call , apply , bind ****
+
+// strict mode -> using stricter version of js to use write this "use strict"
+// non strict mode -> normal mode
+// diff between strict and non strict 
+
+// 1] this inside simple function in strict it gives (undefined)
+//    but in non strict it gives globalObject (windows) in browser
+// "use strict"
+function a() {
+    console.log(this);  // globalObject when in strict mode
+}
+// a()
+
+const obj = {
+  name: "Tushar",
+  sayName: function () {
+    console.log(this.name);
+  },
+  checkName: () => { // in arrow function this refers to its lexical environment in this case it refers to globalObject
+    console.log(this);
+  },
+  anotherCheck : function(){ // if instead of function if we use arrow function this will point to globalObject ****
+        const a = () => {
+            console.log(this); // this refers to obj environment
+        }
+        a()
+  }
+};
+
+obj.checkName(); // Output: Tushar (this refers to obj)
+
+// this in DOM refers to HTMLelement 

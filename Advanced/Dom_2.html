@@ -1,0 +1,47 @@
+<!--
+ // Childrens.
+
+           e.g: let parent = document.querySelector('.parent')
+
+           parent.children -> All the childrens in html collection.
+           parent.firstElementChild -> Gives the first child.
+           parent.lastElementChild -> Gives the last child.
+           parent.childrenNodes -> Gives the nodelist of childrens.
+
+           Note : We can get the parent element aswell.
+           .parentElement() -> It gives the just above parent element. 
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Manipulation 2</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <div class="parent">
+        <div class="days">Sunday</div>
+        <div class="check">Just checking</div>
+        <div class="days">Monday</div>
+        <div class="days">Tuesday</div>
+        <div class="days">Wednesday</div>
+        <div class="days">Thursday</div>
+    </div>
+</body>
+<script>
+    const Parent = document.querySelector('.parent') // getElementByClassName returns HTML Collection
+    for (let i = 0; i < Parent.children.length; i++) {
+        Parent.children[i].style.color = 'red'
+    }
+    // console.log(Parent.children); // traversing towards children
+
+    const FirstChild = document.querySelector('.days') // first element with days classname
+    console.log(FirstChild.parentElement); // to get Parent Element 
+    console.log(FirstChild.nextElementSibling); // next Connected Element Sibling
+    
+
+    
+    
+</script>
+</html>

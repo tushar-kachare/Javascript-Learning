@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    
+</body>
+<script>
+    // const div = document.createElement('div') // creating new element can be anything
+
+    // console.log(div);
+
+    // div.setAttribute('class','Myclass')
+    // div.setAttribute('id',Math.round(Math.random()*10))
+
+    // const text = document.createTextNode('Created first node using js') // always use this method to write text content
+
+    // div.appendChild(text) // append child(text) in div
+
+    // div.style.backgroundColor = 'green'
+    // div.style.padding = '15px'
+    // div.style.color = 'yello'
+    // div.style.borderRadius = '10px'
+
+    // document.body.appendChild(div)
+    
+    const func = (element,text)=> {
+        const Add = document.createElement(element)
+
+        const TextContent = document.createTextNode(text)
+
+        Add.appendChild(TextContent)
+
+        Add.style.backgroundColor = 'green'
+        Add.style.padding = '15px'
+        Add.style.color = 'yello'
+        Add.style.borderRadius = '10px' 
+        document.body.appendChild(Add) // you can use query Selector also to add in any parent
+    }
+    for (let i = 0; i < 5; i++) {
+        func('div',i +'th div')
+    }
+
+
+    // ******Edit ELement******
+    const FirstDiv = document.querySelector('div')
+    const SecondDiv = document.querySelectorAll('div')[1]
+    const ThirdDiv = document.querySelectorAll('div')[2]
+
+    // FirstDiv.textContent = SecondDiv.textContent // to replace 
+    // FirstDiv.replaceWith(SecondDiv) // deletes FirstDiv and replace with SecondDiv
+    
+    // FirstDiv.remove() // it removes FirstDiv
+    
+    </script>
+</html>

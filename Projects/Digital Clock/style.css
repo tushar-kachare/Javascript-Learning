@@ -1,0 +1,34 @@
+.center-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+}
+#Banner{
+    width: 150px;
+    height: 50px;
+    background-color: #c07474;
+    color: white;
+    display: flex; /* center text inside span */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    
+}
+#Time {
+    margin-top: 40px;
+    width: 150px;
+    height: 70px;
+    background-color: #7acfbf;
+    color: white;
+    display: flex; /* center text inside span */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1.7rem;
+
+}

@@ -1,0 +1,51 @@
+<!-- *******DOM********* -->
+
+ <!-- 
+        // DOM Selector => Used to select the elements.
+
+           1. document.getElementById() -> Return the containt of Id
+           2. document.getElementByClassName() -> Return the html collection
+                To convert html Collection to array -> **Array.from(Collection_name)**
+           3. document.getElementByTagName() -> Return the html collection
+           4. document.querySelector() Return the content of selected query can be anything #id , .classname , tagname
+           5. document.querySelectorAll() Return the node list. can use Foreach on node lit
+
+         // Inner Content.
+
+            .innerHTML -> Gives the inner HTML
+            .innerText -> Gives the inner text. (Only the visible text)
+            .textContent -> Gives the inner text . (Including invisible part)
+
+ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Manipulation 1</title>
+    <style>
+        .main{
+            background-color: #212121;
+            color : white
+        }
+    </style>
+</head>
+<body class="main">
+    <div >
+        <h1 id = "id1",class = 'first'>This is h1 tag<span style="display:none;">This is hidden text</span>
+        </h1>
+        <p id="para",class = 'second'>
+            This is paragraph
+        </p>
+        <ul>
+            <ul class="list">First</ul>
+            <ul class="list">Second</ul>
+            <ul class="list">Third</ul>
+        </ul>
+    </div>
+</body>
+</html>
+
+

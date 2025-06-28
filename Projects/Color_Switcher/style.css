@@ -1,0 +1,30 @@
+
+#Red, #Green, #Orange,#Yellow {
+    height: 150px;
+    width: 150px;
+    display:flex;
+    border-radius: 10px;
+    border: 2px solid black;
+    justify-content:center;
+    font-size: larger;
+    align-items: center;
+    cursor: pointer;
+}
+#Red{
+    background-color: red;
+}
+#Orange{
+    background-color: orange;
+}
+#Green{
+    background-color: Green;
+}
+#Yellow{
+    background-color: yellow;
+}
+div{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}

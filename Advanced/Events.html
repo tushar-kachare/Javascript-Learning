@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>htnml Events </title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">google</a></li>
+        </ul>
+   </div>
+
+   
+</body>
+<script>
+
+    document.getElementById('images').addEventListener('click', function(e){
+        e.preventDefault() // prevents any default behaviour like on link after clicking opens new webpage it prevents opening it
+        // console.log(e.target.tagName); // returns the tag name there are many things like id, className,Parent
+        // console.log(e.target.parentNode);
+        // e.target.parentNode.remove() // removes the parentNode image
+        console.log("Parent is clicked");
+    },true)
+
+
+    document.querySelector('#owl').addEventListener('click', function(e){
+        e.stopPropagation() // stops event bubbling only this node will be activated
+        console.log("Child owl is clicked");
+        console.log(e.type); // it tells which type of event happend (click/keydown...)
+        
+          
+    },true) // third parameter is defualt (false) event bubbling (event start from the innermost thats why child is first to Parent in console)
+
+    document.body.addEventListener('keydown',(e) =>{ // keydown when key is pressed like downkey / enter key 
+        console.log("key down");
+        
+    })
+    // ***** PHASES FOR EVENTS ******
+
+    // true -> capture phase event (top to bottom / document -> html -> body -> target)
+    // false -> bubbling phase event (bottom to top / target -> body -> html -> document)
+    // both true/false -> target phase 
+
+
+    // type, timestamp (when event was created), defaultPrevented (if preventDefault() is activated T/F)
+    // target(target from event was generated), toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode
+
+</script>
+</html>

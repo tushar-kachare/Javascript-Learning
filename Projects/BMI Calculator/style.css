@@ -1,0 +1,44 @@
+body{
+    background-color: #655d5d;
+    padding: 30px;
+    display: flex;
+    text-align: center;
+}
+.main{
+    height: 1000vh;
+    width: 1000vh;
+    display: flex;
+    justify-content: center;
+}
+p{
+    height: 30px;
+    font-size: larger;
+    padding-top: 30px;
+}
+#Submit{
+    height : 40px;
+    width: 130px;
+    border-radius: 10px;
+    font-size: larger;
+    margin-top: 30px;
+}
+input{
+    height: 30px;
+    border-radius: 20px;
+    background-color: antiquewhite;
+    font-size: large;
+}
+#Height{
+    font-size: x-large;
+}
+#Weight{
+    font-size: x-large;
+}
+#result {
+    font-size: x-large;
+    color: aqua;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #655d5d;
+    margin-top: 30px;
+}
