@@ -18,9 +18,9 @@ again memory creation and then code execution phase is followed
 then at last whole execution context for function will be deleted
 
 
-***Block Code (if, else, loops)
-for block code separete lexical enviroment is created but withing same execution context so it does not crate separet execution context
-*****CALLSTACK stores all the execution context in stack manner*****
+*** Block Code (if, else, loops)
+for block code separete lexical enviroment is created but within same execution context so it does not create separate execution context
+***** CALLSTACK stores all the execution context in stack manner*****
 
 ***
 You can redeclare Var variables
@@ -62,6 +62,7 @@ console.log(js3()) // 10 is printed because of lexical scope which it stores
 
 
 **** setTimeout(callback, time_in_ms)
+
 it lets you delay piece of code by specific time in MS 
 though it doesnt block other code for that amount of code 
 eg ]
@@ -259,7 +260,7 @@ It is an object that represents eventual completion or fialure of async operatio
 
 
  **** Promise chaining **** 
- when catch statement is at last it checks for any error / rejection of any promise for particular promise use catch just after it
+ when catch statement is at last it checks for any error / rejection of any promise above it ,for particular promise use catch just after it
 
 createOrder(cart)
     .then(function(orderId) {
@@ -313,7 +314,7 @@ function proceedToPayment(orderId) {
 // it will result array of returned value from each promises [val1,val2,val3]
 // **** If one of fails it immediatelly throws (Error) it does not wait for other settlements
 
-2] Promise.allSettled([p1,p2,p3]) // ** It will for settlements of all the promises even if ones of throws error 
+2] Promise.allSettled([p1,p2,p3]) // ** It will wait for settlements of all the promises even if ones of throws error 
 // result array of returnd value even if one is error [val1,val2,val3]
 
 3]Promise.race([p1,p2,p3]) // *** Returns the result of first settled promise wheather it rejects or resolve
@@ -336,7 +337,7 @@ function proceedToPayment(orderId) {
 //    but in non strict it gives globalObject (windows) in browser
 // "use strict"
 function a() {
-    console.log(this);  // globalObject when in strict mode
+    console.log(this);  // globalObject when in non-strict mode
 }
 // a()
 
